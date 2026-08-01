@@ -1,0 +1,156 @@
+import { GoogleGenAI } from "@google/genai";
+import { getRules } from "./rulesEngine.js";
+
+export async function generateScenarioBatch(type, difficulty) {
+  const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY,
+  });
+
+  try {
+const emergencyRules = getRules(type);
+
+if (!emergencyRules) {
+  throw new Error(`No emergency rules found for type: ${type}`);
+}
+    const prompt = `
+You are an emergency response trainer.
+
+Generate FIVE unique emergency response scenarios.
+
+Return ONLY valid JSON.
+
+Return an ARRAY of 5 objects.
+
+Example:
+
+[
+  {
+  "scenario": "...",
+  "options": [
+  {
+  "text": "Evacuate immediately.",
+  "action": "EVACUATE"
+},
+{
+  "text": "Use the elevator.",
+  "action": "USE_ELEVATOR"
+},
+{
+  "text": "Call emergency services.",
+  "action": "CALL_911"
+},
+{
+  "text": "Wait for instructions.",
+  "action": "WAIT"
+}
+],
+  "correct": 0,
+  "ruleIds": ["RULE_1", "RULE_4"],
+  "feedback":[
+  "...",
+  "...",
+  "...",
+  "..."
+],
+  "explanation": "...",
+  "source": "NFPA & FEMA",
+  "risk": "High"
+  }
+]
+  Write concise, realistic emergency scenarios.
+
+Rules:
+- Scenario: 40-60 words.
+- Options: One sentence each.
+- Explanation: 30-40 words.
+- Make distractors believable.
+- Avoid obvious wrong answers.
+- Focus on practical decision making.
+
+Emergency Response Principles
+
+Source:
+${emergencyRules.source}
+
+The CORRECT option MUST follow ALL of these principles.
+
+${emergencyRules.principles
+    .map((rule, i) => `${i + 1}. ${rule}`)
+    .join("\n")}
+
+Every principle above is an application rule.
+
+Assign each principle a rule ID:
+
+RULE_1
+RULE_2
+RULE_3
+...
+
+The "ruleIds" field must contain the IDs of the principles that justify why the correct answer is correct.
+
+Example:
+
+"ruleIds": ["RULE_2", "RULE_5"]
+Each option must include:
+
+text: the response shown to the user.
+action: a short uppercase snake_case action code that represents the user's decision (e.g. EVACUATE, USE_ELEVATOR, CALL_911, HIDE, CHECK_SCENE, APPLY_PRESSURE).
+The action value should describe the action itself, not whether it is correct or incorrect.
+Each option must have a unique action code.
+The action should describe the user's action itself, not whether it is correct or incorrect.
+The "source" field must contain the organization(s) that justify the correct response (for example: "NFPA", "NFPA & FEMA", "American Red Cross", or "OSHA").
+Do not reuse action codes within the same scenario.
+Requirements:
+
+- Generate 5 DIFFERENT scenarios.
+- Emergency Type: ${type}
+- Difficulty: ${difficulty}
+- Every scenario must be unique.
+- Keep each scenario between 40-70 words.
+- Exactly 4 believable options.
+- Only one correct option.
+- "correct" must be an index (0-3).
+- Include:
+    - scenario
+    - options
+    - correct
+    - ruleIds
+    - feedback
+    - explanation
+    - source
+    - risk
+    The "feedback" field must contain exactly 4 strings.
+
+feedback[0] explains option 0.
+
+feedback[1] explains option 1.
+
+feedback[2] explains option 2.
+
+feedback[3] explains option 3.
+
+Each feedback message should explain WHY that specific option is correct or incorrect.
+
+Do not write one generic wrong answer.
+- Return JSON only.
+- Do NOT wrap in markdown.
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-flash-latest",
+      contents: prompt,
+    });
+
+    const text = response.text.trim();
+
+    console.log("Gemini Response:");
+    console.log(text);
+
+    return JSON.parse(text);
+
+  } catch (error) {
+    console.error("Gemini Error:", error);
+    throw error;
+  }
+}
