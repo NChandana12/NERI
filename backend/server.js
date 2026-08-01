@@ -1,31 +1,22 @@
-import "dotenv/config";
-
 import express from "express";
 import cors from "cors";
 
-//import scenarioRoutes from "./routes/scenarioRoutes.js";
-
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "https://neri-ai.netlify.app",
-      "http://localhost:5173",
-    ],
-    methods: ["GET", "POST"],
-    credentials: false,
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.json({
-        message: "Neri Backend Running 🚀",
-    });
+  console.log("GET /");
+  res.send("NERI BACKEND WORKING");
 });
 
-//app.use("/api/scenario", scenarioRoutes);
+app.get("/health", (req, res) => {
+  console.log("GET /health");
+  res.json({
+    status: "ok",
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 
