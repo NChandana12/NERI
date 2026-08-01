@@ -13,7 +13,32 @@ const emergencyRules = getRules(type);
 if (!emergencyRules) {
   throw new Error(`No emergency rules found for type: ${type}`);
 }
-const allowedActions = Object.keys(emergencyRules.actions).join("\n");
+let allowedActions = "";
+let phaseInstructions = "";
+
+if (emergencyRules.phases) {
+  phaseInstructions = `
+This emergency has phases.
+
+Allowed phases:
+
+- DURING_SHAKING
+- AFTER_SHAKING
+
+Include a "phase" field in every scenario.
+
+Example:
+
+"phase": "DURING_SHAKING"
+`;
+
+  allowedActions = Object.keys(
+    emergencyRules.phases.DURING_SHAKING.actions
+  ).join("\n");
+} else {
+  allowedActions = Object.keys(emergencyRules.actions).join("\n");
+}
+
     const prompt = `
 You are an emergency response trainer.
 
@@ -28,6 +53,7 @@ Example:
 [
   {
   "scenario": "...",
+   "phase": "DURING_SHAKING",
   "options": [
   {
   "text": "Evacuate immediately.",
@@ -126,6 +152,7 @@ Requirements:
 - Include:
     - scenario
     - options
+    - phase (only for emergencies that use phases)
     - ruleIds
     - feedback
     - explanation
@@ -148,6 +175,8 @@ Generate realistic action codes only.
 
 The application will determine the correct option using its own rules engine.
 Do not write one generic wrong answer.
+${phaseInstructions}
+
 - Return JSON only.
 - Do NOT wrap in markdown.
 `;

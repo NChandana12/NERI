@@ -16,11 +16,27 @@ export function validateRuleIds(type, ruleIds = []) {
   return ruleIds.every((id) => validRuleIds.includes(id));
 }
 
-export function determineCorrectOption(type, options = []) {
+export function determineCorrectOption(
+  type,
+  phase = null,
+  options = []
+) {
   const rules = getRules(type);
 
   if (!rules) {
     throw new Error(`No emergency rules found for ${type}`);
+  }
+
+  // Use phase-specific actions if available (Earthquake)
+  const actions =
+    rules.phases && phase
+      ? rules.phases[phase]?.actions
+      : rules.actions;
+
+  if (!actions) {
+    throw new Error(
+      `No actions found for ${type}${phase ? ` (${phase})` : ""}`
+    );
   }
 
   let bestIndex = -1;
@@ -28,14 +44,13 @@ export function determineCorrectOption(type, options = []) {
   let matchedRuleIds = [];
 
   options.forEach((option, index) => {
-    const action = rules.actions[option.action];
+    const action = actions[option.action];
 
     if (!action) return;
 
     if (action.priority > highestPriority) {
       highestPriority = action.priority;
       bestIndex = index;
-
       matchedRuleIds = action.rules.map(
         (rule) => `RULE_${rule}`
       );
@@ -48,6 +63,6 @@ export function determineCorrectOption(type, options = []) {
 
   return {
     correct: bestIndex,
-    ruleIds: matchedRuleIds
+    ruleIds: matchedRuleIds,
   };
 }

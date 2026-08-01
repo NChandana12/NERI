@@ -40,44 +40,77 @@ export const RULES = {
   },
 
   Earthquake: {
-    source: "FEMA",
+  source: "FEMA",
 
-    principles: [
-      "Drop, Cover, and Hold On.",
-      "Stay indoors until shaking stops.",
-      "Avoid windows and heavy furniture.",
-      "Do not use elevators.",
-      "Check for injuries after shaking ends.",
-      "Be prepared for aftershocks."
-    ],
+  principles: [
+    "Drop, Cover, and Hold On.",
+    "Stay indoors until shaking stops.",
+    "Avoid windows and heavy furniture.",
+    "Do not use elevators.",
+    "Check for injuries after shaking ends.",
+    "Be prepared for aftershocks."
+  ],
 
-    actions: {
-      DROP_COVER_HOLD: {
-        priority: 100,
-        rules: [1]
-      },
-      STAY_INDOORS: {
-        priority: 80,
-        rules: [2]
-      },
-      AVOID_WINDOWS: {
-        priority: 60,
-        rules: [3]
-      },
-      CHECK_INJURIES: {
-        priority: 40,
-        rules: [5]
-      },
-      USE_ELEVATOR: {
-        priority: 0,
-        rules: [4]
-      },
-      RUN_OUTSIDE: {
-        priority: 20,
-        rules: []
+  phases: {
+    DURING_SHAKING: {
+      actions: {
+        DROP_COVER_HOLD: {
+          priority: 100,
+          rules: [1]
+        },
+        AVOID_WINDOWS: {
+          priority: 80,
+          rules: [3]
+        },
+        STAY_INDOORS: {
+          priority: 60,
+          rules: [2]
+        },
+        CHECK_INJURIES: {
+          priority: 20,
+          rules: [5]
+        },
+        RUN_OUTSIDE: {
+          priority: 10,
+          rules: []
+        },
+        USE_ELEVATOR: {
+          priority: 0,
+          rules: [4]
+        }
+      }
+    },
+
+    AFTER_SHAKING: {
+      actions: {
+        CHECK_INJURIES: {
+          priority: 100,
+          rules: [5]
+        },
+        STAY_INDOORS: {
+          priority: 80,
+          rules: [2]
+        },
+        AVOID_WINDOWS: {
+          priority: 60,
+          rules: [3]
+        },
+        DROP_COVER_HOLD: {
+          priority: 20,
+          rules: [1]
+        },
+        RUN_OUTSIDE: {
+          priority: 10,
+          rules: []
+        },
+        USE_ELEVATOR: {
+          priority: 0,
+          rules: [4]
+        }
       }
     }
-  },
+  }
+},
 
   "Medical Emergency": {
     source: "American Red Cross",
