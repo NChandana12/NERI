@@ -28,10 +28,15 @@ export function determineCorrectOption(
   }
 
   // Use phase-specific actions if available (Earthquake)
-  const actions =
-    rules.phases && phase
-      ? rules.phases[phase]?.actions
-      : rules.actions;
+  let actions;
+
+if (rules.phases) {
+  // Default to DURING_SHAKING if Gemini doesn't send a phase
+  const selectedPhase = phase || "DURING_SHAKING";
+  actions = rules.phases[selectedPhase]?.actions;
+} else {
+  actions = rules.actions;
+}
 
   if (!actions) {
     throw new Error(
