@@ -8,7 +8,16 @@ import scenarioRoutes from "./routes/scenarioRoutes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://neri-ai.netlify.app",
+      "http://localhost:5173",
+    ],
+    methods: ["GET", "POST"],
+    credentials: false,
+  })
+);
 app.use(express.json());
 
 app.get("/", (req, res) => {
