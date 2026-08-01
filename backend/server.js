@@ -32,13 +32,7 @@ app.use("/api/scenario", scenarioRoutes);
 
 console.log("Scenario routes loaded.");
 
-app._router.stack.forEach((r) => {
-  if (r.route) {
-    console.log(r.route.path, r.route.methods);
-  } else if (r.name === "router") {
-    console.log("Mounted router");
-  }
-});
+
 
 const PORT = process.env.PORT || 5000;
 
