@@ -3,7 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-import scenarioRoutes from "./routes/scenarioRoutes.js";
+//import scenarioRoutes from "./routes/scenarioRoutes.js";
 
 const app = express();
 
@@ -25,10 +25,10 @@ app.get("/", (req, res) => {
     });
 });
 
-app.use("/api/scenario", scenarioRoutes);
+//app.use("/api/scenario", scenarioRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
