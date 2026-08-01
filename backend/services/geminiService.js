@@ -9,9 +9,11 @@ export async function generateScenarioBatch(type, difficulty) {
   try {
 const emergencyRules = getRules(type);
 
+
 if (!emergencyRules) {
   throw new Error(`No emergency rules found for type: ${type}`);
 }
+const allowedActions = Object.keys(emergencyRules.actions).join("\n");
     const prompt = `
 You are an emergency response trainer.
 
@@ -44,7 +46,6 @@ Example:
   "action": "WAIT"
 }
 ],
-  "correct": 0,
   "ruleIds": ["RULE_1", "RULE_4"],
   "feedback":[
   "...",
@@ -72,8 +73,14 @@ Emergency Response Principles
 Source:
 ${emergencyRules.source}
 
-The CORRECT option MUST follow ALL of these principles.
+Generate four realistic action options.
 
+Exactly ONE option should represent the highest-priority response according to the emergency response principles below.
+
+The remaining options should be plausible but lower-priority or unsafe responses.
+
+Do not decide or label which option is correct.
+The application will determine the highest-priority option using its own rules engine.
 ${emergencyRules.principles
     .map((rule, i) => `${i + 1}. ${rule}`)
     .join("\n")}
@@ -87,20 +94,27 @@ RULE_2
 RULE_3
 ...
 
-The "ruleIds" field must contain the IDs of the principles that justify why the correct answer is correct.
-
+The "ruleIds" field should contain the IDs of the emergency-response principles represented by the highest-priority action.
 Example:
 
 "ruleIds": ["RULE_2", "RULE_5"]
 Each option must include:
 
 text: the response shown to the user.
-action: a short uppercase snake_case action code that represents the user's decision (e.g. EVACUATE, USE_ELEVATOR, CALL_911, HIDE, CHECK_SCENE, APPLY_PRESSURE).
-The action value should describe the action itself, not whether it is correct or incorrect.
-Each option must have a unique action code.
-The action should describe the user's action itself, not whether it is correct or incorrect.
-The "source" field must contain the organization(s) that justify the correct response (for example: "NFPA", "NFPA & FEMA", "American Red Cross", or "OSHA").
-Do not reuse action codes within the same scenario.
+
+action: use ONLY ONE of the allowed action codes below.
+
+Allowed action codes for this emergency:
+
+${allowedActions}
+
+Use ONLY these action codes.
+
+Do NOT invent new action names.
+
+Each option must use a different action code.
+
+The "source" field must contain the organization(s) that justify the emergency response guidance (for example: "NFPA", "NFPA & FEMA", "American Red Cross", or "OSHA").
 Requirements:
 
 - Generate 5 DIFFERENT scenarios.
@@ -109,12 +123,9 @@ Requirements:
 - Every scenario must be unique.
 - Keep each scenario between 40-70 words.
 - Exactly 4 believable options.
-- Only one correct option.
-- "correct" must be an index (0-3).
 - Include:
     - scenario
     - options
-    - correct
     - ruleIds
     - feedback
     - explanation
@@ -131,7 +142,11 @@ feedback[2] explains option 2.
 feedback[3] explains option 3.
 
 Each feedback message should explain WHY that specific option is correct or incorrect.
+Do NOT include a "correct" field.
 
+Generate realistic action codes only.
+
+The application will determine the correct option using its own rules engine.
 Do not write one generic wrong answer.
 - Return JSON only.
 - Do NOT wrap in markdown.
