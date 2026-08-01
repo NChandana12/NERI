@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { getRules, validateRuleIds } from "../services/rulesEngine.js";
-
+import {
+  getRules,
+  validateRuleIds,
+  determineCorrectOption,
+} from "../services/rulesEngine.js";
 const emergencyTypes = [
   "Building Fire",
   "Earthquake",
@@ -120,6 +123,75 @@ describe("Rules Engine", () => {
 
     });
 
+  });
+
+});
+
+// ------------------------
+// Deterministic Scoring
+// ------------------------
+
+describe("Deterministic Scoring", () => {
+
+  it("Building Fire selects EVACUATE", () => {
+    const result = determineCorrectOption(
+      "Building Fire",
+      null,
+      [
+        { action: "WAIT" },
+        { action: "CALL_911" },
+        { action: "EVACUATE" },
+        { action: "USE_ELEVATOR" },
+      ]
+    );
+
+    expect(result.correct).toBe(2);
+    expect(result.ruleIds).toEqual(["RULE_2"]);
+  });
+
+  it("Earthquake DURING_SHAKING selects DROP_COVER_HOLD", () => {
+    const result = determineCorrectOption(
+      "Earthquake",
+      "DURING_SHAKING",
+      [
+        { action: "RUN_OUTSIDE" },
+        { action: "DROP_COVER_HOLD" },
+        { action: "AVOID_WINDOWS" },
+        { action: "STAY_INDOORS" },
+      ]
+    );
+
+    expect(result.correct).toBe(1);
+    expect(result.ruleIds).toEqual(["RULE_1"]);
+  });
+
+  it("Earthquake AFTER_SHAKING selects CHECK_INJURIES", () => {
+    const result = determineCorrectOption(
+      "Earthquake",
+      "AFTER_SHAKING",
+      [
+        { action: "RUN_OUTSIDE" },
+        { action: "CHECK_INJURIES" },
+        { action: "STAY_INDOORS" },
+        { action: "AVOID_WINDOWS" },
+      ]
+    );
+
+    expect(result.correct).toBe(1);
+    expect(result.ruleIds).toEqual(["RULE_5"]);
+  });
+
+  it("throws when no valid actions exist", () => {
+    expect(() =>
+      determineCorrectOption(
+        "Building Fire",
+        null,
+        [
+          { action: "FLY_AWAY" },
+          { action: "TELEPORT" },
+        ]
+      )
+    ).toThrow();
   });
 
 });
