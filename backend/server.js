@@ -3,7 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-//import scenarioRoutes from "./routes/scenarioRoutes.js";
+import scenarioRoutes from "./routes/scenarioRoutes.js";
 
 const app = express();
 
@@ -17,15 +17,28 @@ app.use(
     credentials: false,
   })
 );
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.json({
-        message: "Neri Backend Running 🚀",
-    });
+  res.json({
+    message: "NERI Backend Running 🚀",
+  });
 });
 
-//app.use("/api/scenario", scenarioRoutes);
+console.log("Loading scenario routes...");
+
+app.use("/api/scenario", scenarioRoutes);
+
+console.log("Scenario routes loaded.");
+
+app._router.stack.forEach((r) => {
+  if (r.route) {
+    console.log(r.route.path, r.route.methods);
+  } else if (r.name === "router") {
+    console.log("Mounted router");
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 
