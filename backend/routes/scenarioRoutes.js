@@ -1,8 +1,13 @@
 import express from "express";
-import { getScenario } from "../controllers/scenarioController.js";
 
 const router = express.Router();
 
-router.post("/", getScenario);
+router.post("/", (req, res) => {
+  console.log("POST /api/scenario hit");
+  res.json({
+    success: true,
+    body: req.body,
+  });
+});
 
 export default router;
