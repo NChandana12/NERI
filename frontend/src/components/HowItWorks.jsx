@@ -1,143 +1,132 @@
 import {
-  Search,
-  Brain,
-  ClipboardCheck,
-  TrendingUp,
+  Sparkles,
+  MousePointerClick,
+  ShieldCheck,
+  GraduationCap,
 } from "lucide-react";
 
 const steps = [
   {
-    icon: Search,
+    icon: Sparkles,
     number: "01",
-    title: "Choose a Scenario",
+    title: "Generate",
     description:
-      "Select from realistic emergency situations such as fires, earthquakes, floods, road accidents, or medical emergencies based on your learning goals.",
+      "Google Gemini creates a realistic emergency scenario with believable response options tailored to the selected emergency type and difficulty.",
   },
   {
-    icon: Brain,
+    icon: MousePointerClick,
     number: "02",
-    title: "Train with AI Guidance",
+    title: "Respond",
     description:
-      "Make decisions as the scenario unfolds while Neri analyzes your actions, provides contextual guidance, and adapts the simulation in real time.",
+      "Choose the action you believe is safest. Every decision is recorded without AI deciding whether your answer is correct.",
   },
   {
-    icon: ClipboardCheck,
+    icon: ShieldCheck,
     number: "03",
-    title: "Receive Instant Feedback",
+    title: "Verify",
     description:
-      "Every response is evaluated against emergency response best practices, highlighting strengths and areas that need improvement.",
+      "NERI's deterministic rules engine independently evaluates your response using trusted guidance from FEMA, NFPA, OSHA, and the American Red Cross.",
   },
   {
-    icon: TrendingUp,
+    icon: GraduationCap,
     number: "04",
-    title: "Improve Over Time",
+    title: "Learn",
     description:
-      "Track your progress through detailed analytics, performance trends, and personalized recommendations after every training session.",
+      "Receive transparent feedback, review the reasoning behind the correct response, and monitor your progress across multiple training sessions.",
   },
 ];
 
 function HowItWorks() {
   return (
-    <section id="Training"
-    className="bg-white px-6 py-28">
-
+    <section
+      id="workflow"
+      className="bg-white px-6 py-28"
+    >
       <div className="mx-auto max-w-7xl">
+
+        {/* Heading */}
 
         <div className="mx-auto max-w-3xl text-center">
 
-          <span className="rounded-full bg-[#114B4B]/10 px-5 py-2 text-sm font-semibold tracking-widest text-[#114B4B]">
-            HOW IT WORKS
+          <span className="rounded-full bg-[#114B4B]/10 px-5 py-2 text-sm font-semibold tracking-wide text-[#114B4B]">
+
+            HOW NERI WORKS
+
           </span>
 
-          <h2 className="mt-8 text-5xl font-black leading-tight text-[#1F2A2A]">
+          <h2 className="mt-8 text-5xl font-black leading-tight text-[#173232]">
 
-            Learn faster with
+            Explainable AI
             <span className="block text-[#114B4B]">
-              AI-driven emergency training.
+
+              Every Step of the Way
+
             </span>
 
           </h2>
 
           <p className="mt-8 text-lg leading-8 text-[#66706D]">
 
-            Neri simplifies emergency preparedness into an interactive,
-            intelligent learning experience designed to build confidence,
-            improve response time, and reinforce life-saving decisions.
+            NERI separates AI-generated content from deterministic
+            decision evaluation, ensuring every training session remains
+            transparent, consistent, and grounded in real emergency-response
+            guidance.
 
           </p>
 
         </div>
 
-        <div className="relative mt-24">
+        {/* Steps */}
 
-          <div className="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 rounded-full bg-[#E8E3DA] lg:block"></div>
+        <div className="mt-24 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 
-          <div className="space-y-16">
+          {steps.map((step) => {
+            const Icon = step.icon;
 
-            {steps.map((step, index) => {
-              const Icon = step.icon;
+            return (
+              <div
+                key={step.number}
+                className="group rounded-3xl border border-[#E8E3DA] bg-[#F8F6F2] p-8 transition-all duration-300 hover:-translate-y-2 hover:border-[#114B4B]/20 hover:shadow-2xl"
+              >
 
-              return (
-                <div
-                  key={step.number}
-                  className={`flex flex-col items-center gap-10 lg:flex-row ${
-                    index % 2 !== 0 ? "lg:flex-row-reverse" : ""
-                  }`}
-                >
+                <div className="flex items-center justify-between">
 
-                  <div className="flex-1">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#114B4B]/10 transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#114B4B]">
 
-                    <div className="rounded-3xl border border-[#E8E3DA] bg-[#F8F6F2] p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                      <div className="flex items-center justify-between">
-
-                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#114B4B]">
-
-                          <Icon
-                            size={30}
-                            className="text-white"
-                          />
-
-                        </div>
-
-                        <span className="text-5xl font-black text-[#114B4B]/15">
-
-                          {step.number}
-
-                        </span>
-
-                      </div>
-
-                      <h3 className="mt-8 text-3xl font-bold text-[#1F2A2A]">
-
-                        {step.title}
-
-                      </h3>
-
-                      <p className="mt-5 leading-8 text-[#66706D]">
-
-                        {step.description}
-
-                      </p>
-
-                    </div>
+                    <Icon
+                      size={30}
+                      className="text-[#C9793B] transition-all duration-300 group-hover:text-white"
+                    />
 
                   </div>
 
-                  <div className="relative z-10 hidden h-8 w-8 rounded-full border-8 border-[#F8F6F2] bg-[#B56A3A] lg:block"></div>
+                  <span className="text-4xl font-black text-[#114B4B]/15">
 
-                  <div className="hidden flex-1 lg:block"></div>
+                    {step.number}
+
+                  </span>
 
                 </div>
-              );
-            })}
 
-          </div>
+                <h3 className="mt-8 text-2xl font-bold text-[#173232]">
+
+                  {step.title}
+
+                </h3>
+
+                <p className="mt-5 leading-8 text-[#66706D]">
+
+                  {step.description}
+
+                </p>
+
+              </div>
+            );
+          })}
 
         </div>
 
       </div>
-
     </section>
   );
 }

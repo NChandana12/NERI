@@ -1,86 +1,80 @@
 import {
   Brain,
   ShieldCheck,
-  Activity,
-  Clock3,
-  Users,
+  Globe2,
   BarChart3,
 } from "lucide-react";
 
 const features = [
   {
     icon: Brain,
-    title: "AI-Powered Decision Support",
+    title: "AI Scenario Generation",
     description:
-      "Receive intelligent guidance throughout every emergency scenario. Neri adapts to your actions in real time and provides context-aware feedback.",
+      "Every training session features realistic emergency scenarios dynamically generated using Google's Gemini API, creating varied and engaging decision-making experiences.",
   },
   {
     icon: ShieldCheck,
-    title: "Realistic Emergency Simulations",
+    title: "Deterministic Rules Engine",
     description:
-      "Experience immersive scenarios including earthquakes, fires, floods, accidents and medical emergencies in a safe learning environment.",
+      "Unlike traditional AI applications, NERI evaluates responses using structured emergency-response guidance from FEMA, NFPA, OSHA, and the American Red Cross for transparent, explainable scoring.",
+    featured: true,
   },
   {
-    icon: Activity,
-    title: "Live Performance Tracking",
+    icon: Globe2,
+    title: "Multiple Emergency Types",
     description:
-      "Monitor every decision, response and action during training with detailed performance metrics generated instantly.",
-  },
-  {
-    icon: Clock3,
-    title: "Response Time Analysis",
-    description:
-      "Improve reaction speed by measuring how quickly you identify hazards and execute the correct emergency procedures.",
-  },
-  {
-    icon: Users,
-    title: "Collaborative Team Training",
-    description:
-      "Practice emergency response individually or with teammates to build communication and coordination under pressure.",
+      "Practice decision-making across building fires, earthquakes, medical emergencies, and chemical spills, with scenario-specific guidance for every situation.",
   },
   {
     icon: BarChart3,
-    title: "Progress Analytics",
+    title: "Track Your Progress",
     description:
-      "Track your learning journey with detailed dashboards, completion statistics and AI-generated improvement suggestions.",
+      "Review previous sessions, monitor performance, and continuously improve emergency-response skills through personalized training history and analytics.",
   },
 ];
 
 function Features() {
   return (
-    <section id="Features"
-    className="bg-[#F8F6F2] px-6 py-28">
-
+    <section
+      id="platform"
+      className="bg-[#F8F6F2] px-6 py-28"
+    >
       <div className="mx-auto max-w-7xl">
+
+        {/* Heading */}
 
         <div className="mx-auto max-w-3xl text-center">
 
-          <span className="rounded-full bg-[#114B4B]/10 px-5 py-2 text-sm font-semibold tracking-wider text-[#114B4B]">
+          <span className="rounded-full bg-[#114B4B]/10 px-5 py-2 text-sm font-semibold tracking-wide text-[#114B4B]">
 
-            PLATFORM FEATURES
+            PLATFORM
 
           </span>
 
-          <h2 className="mt-8 text-5xl font-black leading-tight text-[#1F2A2A]">
+          <h2 className="mt-8 text-5xl font-black leading-tight text-[#173232]">
 
-            Everything you need to
+            Built for
             <span className="block text-[#114B4B]">
-              train with confidence.
+
+              Transparent Emergency Training
+
             </span>
 
           </h2>
 
           <p className="mt-8 text-lg leading-8 text-[#66706D]">
 
-            Neri combines artificial intelligence, immersive simulations
-            and detailed analytics to prepare individuals and teams for
-            real-world emergency situations.
+            AI generates realistic emergency scenarios while NERI's
+            deterministic rules engine ensures every decision is evaluated
+            against trusted emergency-response guidance.
 
           </p>
 
         </div>
 
-        <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        {/* Cards */}
+
+        <div className="mt-20 grid gap-8 md:grid-cols-2">
 
           {features.map((feature) => {
             const Icon = feature.icon;
@@ -88,30 +82,48 @@ function Features() {
             return (
               <div
                 key={feature.title}
-                className="group rounded-3xl border border-[#E7E3DB] bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                className={`group rounded-3xl border p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+                  feature.featured
+                    ? "border-[#114B4B]/20 bg-[#114B4B] text-white"
+                    : "border-[#E7E3DB] bg-white"
+                }`}
               >
-
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#114B4B]/10 transition group-hover:bg-[#114B4B]">
-
+                <div
+                  className={`flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300 group-hover:rotate-6 ${
+                    feature.featured
+                      ? "bg-white/15"
+                      : "bg-[#114B4B]/10 group-hover:bg-[#114B4B]"
+                  }`}
+                >
                   <Icon
                     size={30}
-                    className="text-[#114B4B] transition group-hover:text-white"
+                    className={`transition-all duration-300 ${
+                      feature.featured
+                        ? "text-white"
+                        : "text-[#C9793B] group-hover:text-white"
+                    }`}
                   />
-
                 </div>
 
-                <h3 className="mt-8 text-2xl font-bold text-[#1F2A2A]">
-
+                <h3
+                  className={`mt-8 text-2xl font-bold ${
+                    feature.featured
+                      ? "text-white"
+                      : "text-[#173232]"
+                  }`}
+                >
                   {feature.title}
-
                 </h3>
 
-                <p className="mt-5 leading-8 text-[#66706D]">
-
+                <p
+                  className={`mt-5 leading-8 ${
+                    feature.featured
+                      ? "text-white/80"
+                      : "text-[#66706D]"
+                  }`}
+                >
                   {feature.description}
-
                 </p>
-
               </div>
             );
           })}
@@ -119,7 +131,6 @@ function Features() {
         </div>
 
       </div>
-
     </section>
   );
 }
