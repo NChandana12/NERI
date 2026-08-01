@@ -169,7 +169,25 @@ feedback[2] explains option 2.
 
 feedback[3] explains option 3.
 
-Each feedback message should explain WHY that specific option is correct or incorrect.
+Each feedback message should explain the consequences of choosing that option.
+
+Do NOT use words like "Correct", "Incorrect", "Right", or "Wrong".
+
+Write the feedback as neutral guidance based on emergency response principles.
+
+Examples:
+
+GOOD:
+"Using an elevator during a fire can expose occupants to smoke and possible power failure."
+
+GOOD:
+"Staying low reduces smoke inhalation while evacuating."
+
+BAD:
+"Correct. Staying low..."
+
+BAD:
+"Incorrect. Elevators should never be used..."
 Do NOT include a "correct" field.
 
 Generate realistic action codes only.
