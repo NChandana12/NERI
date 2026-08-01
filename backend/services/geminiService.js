@@ -102,7 +102,7 @@ ${emergencyRules.source}
 Generate four realistic action options.
 
 Exactly ONE option should represent the highest-priority response according to the emergency response principles below.
-
+Randomize the order of the four options. Do not place the highest-priority option in the same position every time.
 The remaining options should be plausible but lower-priority or unsafe responses.
 
 Do not decide or label which option is correct.
