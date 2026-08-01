@@ -1,5 +1,6 @@
 const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  import.meta.env.VITE_API_URL ||
+  "https://neri-production.up.railway.app/api";
 
 export async function fetchScenarioBatch(type = "Office Fire", difficulty = "Medium") {
   const response = await fetch(`${API_URL}/scenario`, {
