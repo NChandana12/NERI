@@ -12,6 +12,27 @@ import {
 
 
 function Dashboard() {
+
+  if (window.innerWidth < 768) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#F8F6F2] p-8">
+        <div className="max-w-sm text-center">
+          <h1 className="text-4xl font-bold text-[#114B4B]">NERI</h1>
+
+          <p className="mt-5 text-lg font-medium text-[#1F2A2A]">
+            Desktop Experience Recommended
+          </p>
+
+          <p className="mt-3 text-stone-600">
+            The training dashboard is optimized for desktop and laptop
+            screens to provide the best emergency simulation experience.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+
   const [sessions, setSessions] = useState([]);
   const navigate = useNavigate();
   const scenarioTypes = [

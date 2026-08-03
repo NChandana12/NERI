@@ -176,14 +176,13 @@ function Hero() {
 
         </div>
 
-        {/* RIGHT */}
+{/* RIGHT */}
 
-        <div className="relative hidden lg:flex w-1/2 items-center justify-center">
+<div className="relative hidden lg:flex w-1/2 items-center justify-center">
 
-          <div className="relative w-[520px] animate-[float_3s_ease-in-out_infinite]">
+  <div className="relative w-[520px] animate-[float_7s_ease-in-out_infinite]">
 
-            <div className="rounded-[36px] border border-white/50 bg-white/80 p-8 shadow-2xl backdrop-blur">
-
+    <div className="rounded-[36px] border border-white/50 bg-white/80 p-8 shadow-2xl backdrop-blur">
               <div className="mb-6 flex items-center justify-between">
 
                 <div>
