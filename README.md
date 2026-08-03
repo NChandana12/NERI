@@ -230,3 +230,14 @@ Current status:
 Developed by **N Chandana**
 
 Built to explore the combination of **AI-generated simulations** with **deterministic rule-based evaluation** for transparent emergency-response training.
+
+---
+
+# 📄 License.
+
+Copyright © 2026 Your Name.
+
+All rights reserved.
+
+This project is provided for portfolio and demonstration purposes only.
+Unauthorized copying, redistribution, or commercial use is prohibited.
