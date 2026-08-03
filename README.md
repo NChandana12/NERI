@@ -12,6 +12,13 @@
 🍂 AI Emergency Training • 🌲 Deterministic Rules Engine • 🧠 Google Gemini • 🔥 Firebase
 </p>
 
+<p align="center">
+🌐 <a href="https://neri-ai.netlify.app/">Live Application</a> •
+📂 <a href="https://github.com/NChandana12/NERI">Source Code</a>
+</p>
+
+---
+
 ---
 
 # 🌿 Why NERI?
