@@ -107,6 +107,14 @@ This separation ensures AI remains responsible for creativity while application 
 
 ---
 
+## 📝 Sample Training Question
+
+<p align="center">
+  <img src="docs/sample ques.png" width="95%">
+</p>
+
+---
+
 ## 🧠 AI Coach Feedback
 
 <p align="center">
