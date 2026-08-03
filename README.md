@@ -18,75 +18,64 @@
 
 **NERI (நெறி)** is a Tamil word meaning **path, principle, or code of conduct**.
 
-The name reflects the project's core philosophy. While AI generates realistic emergency scenarios, a deterministic rules engine evaluates user decisions using established emergency-response guidelines instead of relying solely on AI-generated judgments.
+The name reflects the project's philosophy: while AI generates emergency situations, every decision is evaluated against structured emergency-response principles rather than relying solely on AI judgment.
 
-The project was intentionally named **NERI** because its defining feature is guiding users according to structured emergency-response principles rather than treating AI as the final authority.
+NERI demonstrates how **Generative AI and deterministic software engineering** can work together to create transparent, explainable, and trustworthy learning experiences.
 
 ---
 
 # ✨ Overview
 
-NERI is a full-stack AI-powered emergency response training platform that helps users practice decision-making through realistic emergency simulations.
+NERI is a full-stack AI-powered emergency response training platform that helps users develop life-saving decision-making skills through realistic emergency simulations.
 
-Rather than relying entirely on AI, NERI separates **scenario generation** from **decision evaluation**.
+Unlike conventional AI applications, NERI separates **content generation** from **decision evaluation**.
 
-Google Gemini generates emergency scenarios, while a deterministic rules engine independently determines the correct response using trusted emergency-response guidance from organizations including FEMA, NFPA, OSHA, and the American Red Cross.
+- **Google Gemini** generates dynamic emergency scenarios.
+- **A deterministic rules engine** independently evaluates every response using trusted emergency-response guidance from organizations including FEMA, NFPA, OSHA, and the American Red Cross.
 
-This architecture provides transparent, explainable, and consistent emergency-response training.
+This architecture produces consistent, explainable, and transparent emergency-response training.
 
 ---
 
 # 🌿 Features
 
-- 🧠 AI-generated emergency scenarios powered by Google Gemini
-- 🌲 Deterministic rules engine for transparent decision evaluation
-- 🔍 Explainable scoring independent of AI judgments
-- 🌍 Multiple emergency types
+- 🧠 AI-generated emergency scenarios using Google Gemini
+- 🌲 Deterministic rules engine for transparent evaluation
+- 🔍 Explainable AI Coach feedback
+- 🌍 Multiple emergency simulations
   - 🔥 Building Fire
   - 🌎 Earthquake
   - 🚑 Medical Emergency
   - ☣️ Chemical Spill
 - 🍂 Phase-aware earthquake evaluation
-- 📊 Firebase-powered progress tracking
-- ☁️ Live deployment using Netlify and Railway
-- 🧪 33 automated unit tests
+- 📊 Performance dashboard
+- ☁️ Firebase Firestore data storage
+- 🚀 Netlify + Railway deployment
+- 🧪 Automated backend testing
 
 ---
 
 # 🏗 Architecture
 
-```text
-                    NERI Architecture
-
-             React + Vite Frontend
-                      │
-                      ▼
-               Express Backend
-                      │
-      ┌───────────────┼───────────────┐
-      ▼               ▼               ▼
- Google Gemini    Rules Engine     Firebase
- Scenario AI    Deterministic      Progress
-                Evaluation         Storage
-      │               │
-      └───────► Training Results ◄───────┘
-```
+<p align="center">
+  <img src="docs/architecture.png" width="90%">
+</p>
 
 ---
 
 # 🧠 Deterministic Rules Engine
 
-Most AI-powered training platforms rely entirely on a language model to both generate and evaluate responses.
+Most AI-powered learning platforms allow the language model to both generate and evaluate answers.
 
 NERI follows a different architecture.
 
-- Google Gemini generates realistic emergency scenarios.
-- Each response option contains a structured action code.
-- A deterministic rules engine evaluates actions using emergency-response guidance.
+- Google Gemini generates emergency scenarios.
+- Each answer option contains a structured action code.
+- A deterministic rules engine evaluates responses.
+- Evaluation follows emergency-response best practices rather than AI opinions.
 - Earthquake scenarios support phase-aware evaluation (during shaking vs. after shaking).
-- The backend determines the correct response before returning the scenario.
 
-This separation ensures AI remains responsible for content generation while application logic remains responsible for scoring.
+This separation ensures AI remains responsible for creativity while application logic remains responsible for correctness.
 
 > **AI creates the scenario. The rules engine determines the correct response.**
 
@@ -94,57 +83,73 @@ This separation ensures AI remains responsible for content generation while appl
 
 # 📸 Screenshots
 
-## Landing Page
+## 🏠 Landing Page
 
-> *(Add screenshot here)*
-
----
-
-## Dashboard
-
-> *(Add screenshot here)*
+<p align="center">
+  <img src="docs/Landing.png" width="95%">
+</p>
 
 ---
 
-## Training Scenario
+## 📊 Dashboard
 
-> *(Add screenshot here)*
+<p align="center">
+  <img src="docs/Dashboard.png" width="95%">
+</p>
 
 ---
 
-## AI Coach & Results
+## 🎯 Training Selection
 
-> *(Add screenshot here)*
+<p align="center">
+  <img src="docs/Training.png" width="95%">
+</p>
+
+---
+
+## 🧠 AI Coach Feedback
+
+<p align="center">
+  <img src="docs/ai-coach.png" width="95%">
+</p>
+
+---
+
+## 🎉 Training Results
+
+<p align="center">
+  <img src="docs/results.png" width="95%">
+</p>
 
 ---
 
 # 🛠 Tech Stack
 
-### Frontend
+## Frontend
 
 - React
 - Vite
 - Tailwind CSS
 - React Router
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
 
-### AI
+## Artificial Intelligence
 
 - Google Gemini API
 
-### Database
+## Database
 
 - Firebase Firestore
 
-### Testing
+## Testing
 
 - Vitest
 
-### Deployment
+## Deployment
 
 - Netlify
 - Railway
@@ -156,7 +161,7 @@ This separation ensures AI remains responsible for content generation while appl
 ## Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/NERI.git
+git clone https://github.com/NChandana12/NERI.git
 ```
 
 ```bash
@@ -198,46 +203,54 @@ npm run dev
 
 # 🧪 Testing
 
-Run all backend tests.
+Run the backend test suite.
 
 ```bash
 npm test
 ```
 
-Current status:
+The project includes automated tests covering:
 
-- ✅ 33 automated unit tests passing
-- ✅ Rules validation
-- ✅ Deterministic scoring
-- ✅ Emergency rule consistency
+- ✅ Deterministic rules validation
+- ✅ Emergency response scoring
+- ✅ AI response parsing
+- ✅ Rule consistency
 
 ---
 
 # 🍂 Future Improvements
 
 - Additional emergency scenarios
-- Adaptive difficulty based on user performance
-- Multi-user collaborative training
+- Adaptive learning difficulty
 - Instructor dashboard
-- Scenario analytics and reporting
-- Leaderboards and certification system
-- Mobile-optimized training interface
+- Team-based simulations
+- Scenario analytics
+- Certification system
+- Fully responsive mobile interface
 
 ---
 
 # 👨‍💻 Author
 
-Developed by **N Chandana**
+**N Chandana**
 
-Built to explore the combination of **AI-generated simulations** with **deterministic rule-based evaluation** for transparent emergency-response training.
+Built as a portfolio project exploring how **Generative AI** can be combined with **deterministic software systems** to create transparent emergency-response training.
 
 ---
 
-# 📄 License.
+# 📄 License
 
-Copyright © 2026 Your Name.
+**Copyright © 2026 N Chandana**
 
-All rights reserved.
+All Rights Reserved.
 
-This project is provided for portfolio and demonstration purposes only.
-Unauthorized copying, redistribution, or commercial use is prohibited.
+This software and its source code are provided solely for portfolio, educational, and demonstration purposes.
+
+You may **not**:
+
+- Copy substantial portions of the source code
+- Redistribute the project
+- Modify and publish derivative works
+- Use the project commercially without written permission
+
+See the **LICENSE** file for complete terms.
